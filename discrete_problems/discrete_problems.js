@@ -612,10 +612,26 @@ class DP {
 			//mi_possible_actions.textContent = array_possible_actions.join(",");
 			mi_possible_actions.innerHTML = "<mi>" + array_possible_actions.join("</mi><mi>") + "</mi>";
 
+			// Valeur de la fonction de récompense
 			let mi_reward = document.getElementById("mi_reward");
 			if(!(i < 0 || j < 0 || i >= that.rows || j >= that.cols)) {
 				mi_reward.innerHTML = that.reward_matrix[i][j];
 			}
+
+			// Valeur de... la fonction de valeur
+			let mi_up = document.getElementById("mi_up");
+			let mi_right = document.getElementById("mi_right");
+			let mi_down = document.getElementById("mi_down");
+			let mi_left = document.getElementById("mi_left");
+			let mi_no_move = document.getElementById("mi_no_move");
+			
+			if(!(i < 0 || j < 0 || i >= that.rows || j >= that.cols)) {
+				mi_no_move.innerHTML = that.value_matrix[i][j];
+			}
+			mi_up.innerHTML = array_possible_actions.includes("Up") ? that.value_matrix[i-1][j] : "?";
+			mi_right.innerHTML = array_possible_actions.includes("Right") ? that.value_matrix[i][j+1] : "?";
+			mi_down.innerHTML = array_possible_actions.includes("Down") ? that.value_matrix[i+1][j] : "?";
+			mi_left.innerHTML = array_possible_actions.includes("Left") ? that.value_matrix[i][j-1] : "?";
 		});
 	}
 	request_json_maze(rows=15, cols=20) {
