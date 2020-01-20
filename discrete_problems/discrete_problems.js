@@ -598,20 +598,24 @@ class DP {
 			}
 		});
 		this.canvas.addEventListener('mousemove', function(event) {
-			let [x, y] = that.coordinates_from_mouse_event(event);
+			let [j, i] = that.coordinates_from_mouse_event(event);
 
 			let mi_i = document.getElementById("mi_i_mouse");
 			let mi_j = document.getElementById("mi_j_mouse");
 			
 			let mi_possible_actions = document.getElementById("mi_possible_actions");
-			let array_possible_actions = that.possible_actions(y, x);
+			let array_possible_actions = that.possible_actions(i, j);
 			
-			mi_i.innerHTML = (''+y).padStart(2,'0');
-			mi_j.innerHTML = (''+x).padStart(2,'0');
+			mi_i.innerHTML = (''+i).padStart(2,'0');
+			mi_j.innerHTML = (''+j).padStart(2,'0');
 			
-			console.log(array_possible_actions.join(","));
 			//mi_possible_actions.textContent = array_possible_actions.join(",");
 			mi_possible_actions.innerHTML = "<mi>" + array_possible_actions.join("</mi><mi>") + "</mi>";
+
+			let mi_reward = document.getElementById("mi_reward");
+			if(!(i < 0 || j < 0 || i >= that.rows || j >= that.cols)) {
+				mi_reward.innerHTML = that.reward_matrix[i][j];
+			}
 		});
 	}
 	request_json_maze(rows=15, cols=20) {

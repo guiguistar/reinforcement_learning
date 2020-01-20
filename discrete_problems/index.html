@@ -80,30 +80,45 @@
 	  </section>
 	  <section class="float-left">
 		<math>
-		  <mrow>
-			<mi>x</mi>
-			<mo>=</mo>
-			<mfenced open="(" close=")" separator=",">
-			  <mi id="mi_i_mouse">
-			  </mi>
-			  <mi id="mi_j_mouse">
-			  </mi>
-			</mfenced>
-		  </mrow>
-		</math>
-		<br>
-		<math>
-		  <mrow>
-			<mrow>
-			  <mi>U</mi>
-			  <mfenced open="(" close=")" separator=",">
+		  <mtable>
+			<mtr>
+			  <mrow>
 				<mi>x</mi>
-			  </mfenced>
-			</mrow>
-			<mo>=</mo>
-			<mfenced open="{" close="}" separator="," id="mi_possible_actions">
-			</mfenced>
-		  </mrow>
+				<mo>=</mo>
+				<mfenced open="(" close=")" separator=",">
+				  <mi id="mi_i_mouse">
+				  </mi>
+				  <mi id="mi_j_mouse">
+				  </mi>
+				</mfenced>
+			  </mrow>
+			</mtr>
+			<mtr>
+			  <mrow>
+				<mrow>
+				  <mi>U</mi>
+				  <mo>&#x2061;<!--FUNCTION APPLICATION--></mo>
+				  <mfenced open="(" close=")" separator=",">
+					<mi>x</mi>
+				  </mfenced>
+				</mrow>
+				<mo>=</mo>
+				<mfenced open="{" close="}" separator="," id="mi_possible_actions">
+				</mfenced>
+			  </mrow>
+			</mtr>
+			<mtr>
+			  <mrow>
+				<mi>r</mi>
+				<mo>&#x2061;<!--FUNCTION APPLICATION--></mo>
+				<mfenced>
+				  <mi>x</mi>
+				  <mi>u</mi>
+				</mfenced>
+				<mo>=</mo>
+				<mi id="mi_reward"></mi>
+			  </mrow>
+			</mtr>
 		</math>
 	  </section>
 	</main>
