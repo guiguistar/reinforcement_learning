@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="index.css">
+	<link rel="stylesheet"
+		  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+		  crossorigin="anonymous">
+    <title>Value iteration</title>
+  </head>
+  <body>
+    <main class="container">
+	  <section id="first_section" class="float-left">
+		<canvas id="main_canvas" width="640px" height="480px"></canvas>
+		<img src="bellman_equation2.svg" alt="Bellman's equation">
+	  </section>
+	  <section class="float-left">
+		<h4>Value iteration</h4>
+		<form>
+		  <div>
+			<label for="iteration_number_input">Iterations</label>
+			<input type="number" id="iteration_number_input" min="1" max="10000" value="1">
+		  </div>
+		  <button type="submit" id="iteration_button"
+				  class="btn btn-primary">
+			Iterate
+		  </button>
+		  <button type="submit" id="converge_button"
+				  class="btn btn-primary">
+			Converge
+		  </button>
+		</form>
+		<h4>Maze</h4>
+		<form>
+		  <div class="form-group">
+			<label for="rows_input">Rows</label>
+			<input type="range" id="rows_input" min="1" max="100" value="20">
+		  </div>
+		  <div>
+			<label for="cols_input">Cols</label>
+			<input type="range" id="cols_input" min="1" max="100" value="20">
+		  </div>
+		  <button type="submit" class="btn btn-primary" id="new_maze_button">New maze</button>
+		</form>
+		<h4>Matrices</h4>
+		<form id="matrices_options_group">
+		  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+			<label class="btn btn-secondary active">
+			  <input type="radio" name="matrices_options" id="value_option" checked> Value
+			</label>
+			<label class="btn btn-secondary">
+			  <input type="radio" name="matrices_options" id="reward_option" > Reward
+			</label>
+			<label class="btn btn-secondary">
+			  <input type="radio" name="matrices_options" id="none_option" > None
+			</label>
+		  </div>
+		</form>
+		<div>
+		  <label for="draw_checked_input">values</label>
+		  <input type="checkbox" id="draw_checked_input"
+				 autocomplete="off" checked >
+		</div>
+		<h4>Mouse
+		  i=<span id="i_mouse">?</span>,j=<span id="j_mouse">?</span>
+		</h4>
+		<form id="mouse_options_group">
+		  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+			<label class="btn btn-secondary active">
+			  <input type="radio" name="mouse_options"
+					 id="start_point_option" checked >
+			  Start point
+			</label>
+			<label class="btn btn-secondary">
+			  <input type="radio" name="mouse_options"
+					 id="end_point_option" >
+			  End point
+			</label>
+		  </div>
+		</form>
+		<p>i_goal=<span id="i_goal">?</span>, j_goal=<span id="j_goal">?</span></p>
+	  </section>
+	  <section class="float-left">
+		<div id="mathml_container">
+		  <math>
+			<mtable groupalign="{right center left}">
+			  <mtr>
+				<mtd>
+				  <mrow>
+					<mrow>
+					  <msup>
+						<mi>V</mi>
+						<mo>*</mo>
+					  </msup>
+					  <mo>&#x2061;<!--FUNCTION APPLICATION--></mo>
+					  <mfenced>
+						<mfenced class="x-variable">
+						  <mi id="mi_i_value" class="mi_i">i</mi>
+						  <mi id="mi_j_value" class="mi_j">j</mi>
+						</mfenced>
+					  </mfenced>
+					</mrow>
+				</mtd>
+				<mtd>
+				  <mo>=</mo>
+				</mtd>
+				<mtd>
+				  <mrow>
+					<munder>
+					  <mi>max</mi>
+					  <mrow>
+						<mi>u</mi>
+						<mo>&isin;</mo>
+						<mrow>
+						  <mi>U</mi>
+						  <mo>&#x2061;<!--FUNCTION APPLICATION--></mo>
+						  <mo>(</mo>
+						  <mfenced class="x-variable">
+							<mi class="mi_i">i</mi>
+							<mi class="mi_j">j</mi>
+						  </mfenced>
+						  <mo>)</mo>					
+						</mrow>
+					  </mrow>
+					</munder>
+					<mo>{</mo>
+					<mrow>
+					  <mi>r</mi>
+					  <mo>&#x2061;<!--FUNCTION APPLICATION--></mo>
+					  <mfenced>
+						<mfenced class="x-variable">
+						  <mi class="mi_i">i</mi>
+						  <mi class="mi_j">j</mi>
+						</mfenced>
+						<mi>u</mi>
+					  </mfenced>
+					</mrow>
+					<mo>+</mo>
+					<mrow>
+					  <msup>
+						<mi>V</mi>
+						<mo>*</mo>
+					  </msup>
+					  <mo>&#x2061;<!--FUNCTION APPLICATION--></mo>
+					  <mfenced>
+						<mrow>
+						  <mi>&nu;</mi>
+						  <mo>&#x2061;<!--FUNCTION APPLICATION--></mo>
+						  <mfenced>
+ 							<mfenced class="x-variable">
+							  <mi class="mi_i">i</mi>
+							  <mi class="mi_j">j</mi>
+							</mfenced>
+							<mi>u</mi>
+						  </mfenced>
+						</mrow>
+					  </mfenced>
+					</mrow>
+					<mo>}</mo>
+				  </mrow>
+				</mrow>
+				</mtd>
+			  </mtr>
+			  <mtr>
+				<mtd>
+				  <mrow>
+					<mrow>
+					</mrow>
+				</mtd>
+				<mtd>
+				  <mo>=</mo>
+				</mtd>
+				<mtd>
+				  <mrow>
+					<munder>
+					  <mi>max</mi>
+					  <mrow>
+						<mi>u</mi>
+						<mo>&isin;</mo>
+						<mrow>
+						  <mo>{</mo>
+						  <mi id="mi_possible_actions" class="x-small-font"></mi>
+						  <mo>}</mo>
+						</mrow>
+					  </mrow>
+					</munder>
+					<mo>{</mo>
+					<mrow>
+					  <mi>r</mi>
+					  <mo>&#x2061;<!--FUNCTION APPLICATION--></mo>
+					  <mfenced>
+						<mfenced class="x-variable">
+						  <mi class="mi_i">i</mi>
+						  <mi class="mi_j">j</mi>
+						</mfenced>
+						<mi>u</mi>
+					  </mfenced>
+					</mrow>
+					<mo>+</mo>
+					<mrow>
+					  <msup>
+						<mi>V</mi>
+						<mo>*</mo>
+					  </msup>
+					  <mo>&#x2061;<!--FUNCTION APPLICATION--></mo>
+					  <mfenced>
+						<mrow>
+						  <mi>&nu;</mi>
+						  <mo>&#x2061;<!--FUNCTION APPLICATION--></mo>
+						  <mfenced>
+							<mfenced class="x-variable">
+							  <mi class="mi_i">i</mi>
+							  <mi class="mi_j">j</mi>
+							</mfenced>
+							<mi>u</mi>
+						  </mfenced>
+						</mrow>
+					  </mfenced>
+					</mrow>
+					<mo>}</mo>
+				  </mrow>
+				</mrow>
+				</mtd>
+			  </mtr>
+			</mtable>
+		  </math>
+		</div>
+	  </section>
+	</main>
+	<script src="valueIteration.js"></script>
+  </body>
+</html>

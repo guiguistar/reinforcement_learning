@@ -1,0 +1,33 @@
+body {
+	text-align: center;
+}
+main {
+	/*display: flex;*/
+}
+section {
+	/*border: solid 1px;*/
+	padding: 5px;
+}
+canvas {
+	/*border: solid 1px;*/
+	/*border-color: 'black';*/
+}
+input[type="number"] {
+	width: 5em;
+	text-align: center;
+}
+#mathml_container {
+	font-size: x-large;
+}
+.hidden {
+	display: none;
+}
+.small-font {
+	font-size: small;
+}
+.x-small-font {
+	font-size: x-small;
+}
+.x-variable {
+	font-size: small;
+}
