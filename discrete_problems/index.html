@@ -62,9 +62,6 @@
 		  <input type="checkbox" id="draw_checked_input"
 				 autocomplete="off" checked >
 		</div>
-		<h4>Mouse
-		  i=<span id="i_mouse">?</span>,j=<span id="j_mouse">?</span>
-		</h4>
 		<form id="mouse_options_group">
 		  <div class="btn-group btn-group-toggle" data-toggle="buttons">
 			<label class="btn btn-secondary active">
@@ -82,6 +79,18 @@
 		<p>i_goal=<span id="i_goal">?</span>, j_goal=<span id="j_goal">?</span></p>
 	  </section>
 	  <section class="float-left">
+		<math>
+		  <mrow>
+			<mi>x</mi>
+			<mo>=</mo>
+			<mfenced open="(" close=")" separator=",">
+			  <mi id="mi_i_mouse">
+			  </mi>
+			  <mi id="mi_j_mouse">
+			  </mi>
+			</mfenced>
+		  </mrow>
+		</math>
 	  </section>
 	</main>
 	<script src="discrete_problems.js"></script>

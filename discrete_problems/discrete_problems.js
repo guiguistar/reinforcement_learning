@@ -598,32 +598,17 @@ class DP {
 			}
 		});
 		this.canvas.addEventListener('mousemove', function(event) {
-			let x_span = document.getElementById('j_mouse');
-			let y_span = document.getElementById('i_mouse');
 			let [x, y] = that.coordinates_from_mouse_event(event);
 
-			//let mi_i = document.getElementById("mi_i_value");
-			//let mi_j = document.getElementById("mi_j_value");
-
-			let mi_i = document.getElementsByClassName("mi_i");
-			let mi_j = document.getElementsByClassName("mi_j");
+			let mi_i = document.getElementById("mi_i_mouse");
+			let mi_j = document.getElementById("mi_j_mouse");
 			
 			let mi_possible_actions = document.getElementById("mi_possible_actions");
 			let array_possible_actions = that.possible_actions(y, x);
 			
-			x_span.innerText = x;
-			y_span.innerText = y;
-
-			//mi_i.innerHTML = y;
-			//mi_j.innerHTML = x;
-			/*
-			for(let mi of mi_i) {
-				mi.innerHTML = y;
-			}
-			for(let mi of mi_j) {
-				mi.innerHTML = x;
-			}
-			*/
+			mi_i.innerHTML = (''+y).padStart(2,'0');
+			mi_j.innerHTML = (''+x).padStart(2,'0');
+			
 			console.log(array_possible_actions.join(","));
 			//mi_possible_actions.textContent = array_possible_actions.join(",");
 		});
