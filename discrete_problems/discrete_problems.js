@@ -611,6 +611,7 @@ class DP {
 			
 			console.log(array_possible_actions.join(","));
 			//mi_possible_actions.textContent = array_possible_actions.join(",");
+			mi_possible_actions.innerHTML = "<mi>" + array_possible_actions.join("</mi><mi>") + "</mi>";
 		});
 	}
 	request_json_maze(rows=15, cols=20) {
