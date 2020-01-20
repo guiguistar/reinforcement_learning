@@ -180,6 +180,12 @@ class DP {
 	}
 	possible_actions(i, j) {
 		let actions = ['NoMove'];
+
+		// Ce test est possiblement à sortir de cettte fonction
+		if(i < 0 || j < 0 || i >= this.rows || j >= this.cols) {
+			return actions;
+		}
+		
 		let digit = this.matrix[i][j];
 		
 		if(i > 0 && digit & direction_bit.UP) {
@@ -610,15 +616,16 @@ class DP {
 
 			//mi_i.innerHTML = y;
 			//mi_j.innerHTML = x;
+			/*
 			for(let mi of mi_i) {
 				mi.innerHTML = y;
 			}
 			for(let mi of mi_j) {
 				mi.innerHTML = x;
 			}
-			
+			*/
 			console.log(array_possible_actions.join(","));
-			mi_possible_actions.textContent = array_possible_actions.join(",");
+			//mi_possible_actions.textContent = array_possible_actions.join(",");
 		});
 	}
 	request_json_maze(rows=15, cols=20) {
