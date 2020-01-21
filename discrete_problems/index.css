@@ -1,3 +1,7 @@
+:root {
+	--max-value-border: dashed 2px;;
+}
+
 body {
 	text-align: center;
 }
@@ -30,4 +34,20 @@ input[type="number"] {
 }
 .x-variable {
 	font-size: small;
+}
+
+
+#max_value_grid td{
+	width: 50px;
+	text-align: center;
+}
+#cell_1_1, #cell_1_2, #cell_2_1, #cell_2_2 {
+	border-right: var(--max-value-border);
+	border-bottom: var(--max-value-border);
+}
+#cell_3_1, #cell_3_2 {
+	border-right: var(--max-value-border);
+}
+#cell_1_3, #cell_2_3 {
+	border-bottom: var(--max-value-border);
 }

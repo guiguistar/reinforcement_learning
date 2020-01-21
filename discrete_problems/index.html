@@ -123,77 +123,63 @@
 		<br>
 		<math>
 		  <mrow>
-			<msup>
-			  <mi>V</mi>
-			  <mo>*</mo>
-			</msup>
-			<mo>&#x2061;<!--FUNCTION APPLICATION--></mo>
-			<mfenced>
-			  <mrow>
-				<mi>&nu;</mi>
-				<mo>&#x2061;<!--FUNCTION APPLICATION--></mo>
-				<mfenced>
-				  <mi>x</mi>
-				  <mi>u</mi>
-				</mfenced>
-			  </mrow>
-			</mfenced>
-			<mo>=</mo>
-			<mi>?</mi>
-		  </mrow>
-		</math>
-		<br>
-		<math>
-		  <mtable rowlines="dashed" columnlines="dashed" columnwidth="50px">
-			<mtr>
-			  <mtd>
-			  </mtd>
-			  <mtd>
-				<mrow>
-				  <mi id="mi_up">?</mi>
-				</mrow>
-			  </mtd>
-			  <mtd>
-			  </mtd>
-			</mtr>
-			<mtr>
-			  <mtd>
-				<mrow>
-				  <mi id="mi_left">?</mi>
-				</mrow>
-			  </mtd>
-			  <mtd>
-				<mrow>
-				  <mi id="mi_no_move">?</mi>
-				</mrow>
-			  </mtd>
-			  <mtd>
-				<mrow>
-				  <mi id="mi_right">?</mi>
-				</mrow>
-			  </mtd>
-			</mtr>
-			<mtr>
-			  <mtd>
-			  </mtd>
-			  <mtd>
-				<mrow>
-				  <mi id="mi_down">?</mi>
-				</mrow>
-			  </mtd>
-			  <mtd>
-			  </mtd>
-			</mtr>
-		  </mtable>
-		</math>
-		<br>
-		<math>
-		  <mrow>
 			<mi>max</mi>
 			<mo>&rarr;</mo>
 			<mi id="mi_max">?</mi>
 		  </mrow>
 		</math>
+		<table id="max_value_grid">
+		  <tbody>
+			<tr>
+			  <td id="cell_1_0"></td>
+			  <td id="cell_1_1"></td>
+			  <td id="cell_1_2">
+				<math><mrow><mi id="mi_up"></mi></mrow></math>
+			  </td>
+			<td id="cell_1_3"></td>
+			</tr>
+			<tr>
+			  <td id="cell_2_0">
+				<math>
+				  <mrow>
+					<msup>
+					  <mi>V</mi>
+					  <mo>*</mo>
+					</msup>
+					<mo>&#x2061;<!--FUNCTION APPLICATION--></mo>
+					<mfenced>
+					  <mrow>
+						<mi>&nu;</mi>
+						<mo>&#x2061;<!--FUNCTION APPLICATION--></mo>
+						<mfenced>
+						  <mi>x</mi>
+						  <mi>u</mi>
+						</mfenced>
+					  </mrow>
+					</mfenced>
+				  <mo>=</mo>
+				</math>
+			  </td>
+			  <td id="cell_2_1">
+				<math><mrow><mi id="mi_left"></mi></mrow></math>
+			  </td>
+			  <td id="cell_2_2">
+				<math><mrow><mi id="mi_no_move"></mi></mrow></math>
+			  </td>
+			  <td id="cell_2_3">
+				<math><mrow><mi id="mi_right"></mi></mrow></math>
+			  </td>
+			</tr>
+			<tr>
+			  <td id="cell_3_0"></td>
+			  <td id="cell_3_1"></td>
+			  <td id="cell_3_2">
+				<math><mrow><mi id="mi_down"></mi></mrow></math>
+			  </td>
+			  <td id="cell_3_3"></td>
+			</tr>
+		  </tbody>
+		</table>
 	  </section>
 	</main>
 	<script src="discrete_problems.js"></script>

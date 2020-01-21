@@ -645,10 +645,16 @@ class DP {
 			if(!(i < 0 || j < 0 || i >= that.rows || j >= that.cols)) {
 				mi_no_move.innerHTML = that.value_matrix[i][j];
 			}
-			mi_up.innerHTML = array_possible_actions.includes("Up") ? that.value_matrix[i-1][j] : "?";
-			mi_right.innerHTML = array_possible_actions.includes("Right") ? that.value_matrix[i][j+1] : "?";
-			mi_down.innerHTML = array_possible_actions.includes("Down") ? that.value_matrix[i+1][j] : "?";
-			mi_left.innerHTML = array_possible_actions.includes("Left") ? that.value_matrix[i][j-1] : "?";
+
+			//let f = (x) => (""+x).padStart(3, "x"); 
+			let f = x => x; 
+			
+			let fill_string = f("");
+			
+			mi_up.innerHTML    = array_possible_actions.includes("Up")    ? f(that.value_matrix[i-1][j]) : fill_string;
+			mi_right.innerHTML = array_possible_actions.includes("Right") ? f(that.value_matrix[i][j+1]) : fill_string;
+			mi_down.innerHTML  = array_possible_actions.includes("Down")  ? f(that.value_matrix[i+1][j]) : fill_string;
+			mi_left.innerHTML  = array_possible_actions.includes("Left")  ? f(that.value_matrix[i][j-1]) : fill_string;
 
 			// Valeur du max
 			let mi_max = document.getElementById("mi_max");
