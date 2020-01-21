@@ -401,11 +401,9 @@ class DP {
 		return I;
 	}
 	fill_until_converge() {
-		let counter = 0;
 		let that = this;
 		
 		function helper() {
-			counter++;
 			that.iteration(1);
 		
 			that.fill_value_matrix();
