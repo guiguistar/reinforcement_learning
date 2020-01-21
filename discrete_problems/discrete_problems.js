@@ -133,6 +133,11 @@ class DP {
 		
 		//this.place_goal_randomly(0);
 		this.place_goal(Math.floor(this.rows / 2), Math.floor(this.cols / 2));
+
+		// Put the result of first iteration in this.new_value_matrix
+		this.iteration_counter = -1;
+		this.iteration(1);
+
 		this.repaint();
 	}
 	init_sizes(canvas, coeff=0.6) {
@@ -377,6 +382,7 @@ class DP {
 				this.new_value_matrix[i][j] = this.maximum_value(i, j, gamma);
 			}
 		}
+		this.iteration_counter += 1;
 	}
 	iterations(n, gamma=1) {
 		for(let i = 1; i <= n; i++) {
