@@ -220,7 +220,7 @@ class DP {
 		
 		return actions;
 	}
-	maximum_value(i, j, gamma) {
+	maximum_value(i, j, gamma=1) {
 		let actions = this.possible_actions(i, j);
 		let that = this;
 		
@@ -418,11 +418,12 @@ class DP {
 				that.animation_request = requestAnimationFrame(helper);
 			}
 			else {
-				console.log( (counter - 1) + " iterations before convergence.");
+				console.log( (that.iteration_counter - 1) + " iterations before convergence.");
 			}
 		}
 
 		this.animation_request = requestAnimationFrame(helper);
+
 	}
 	fill_path_to_goal_from(i, j) {
 		let that = this;
@@ -648,9 +649,15 @@ class DP {
 			mi_right.innerHTML = array_possible_actions.includes("Right") ? that.value_matrix[i][j+1] : "?";
 			mi_down.innerHTML = array_possible_actions.includes("Down") ? that.value_matrix[i+1][j] : "?";
 			mi_left.innerHTML = array_possible_actions.includes("Left") ? that.value_matrix[i][j-1] : "?";
+
+			// Valeur du max
+			let mi_max = document.getElementById("mi_max");
+			if(!(i < 0 || j < 0 || i >= that.rows || j >= that.cols)) {
+				mi_max.innerHTML = that.maximum_value(i, j);
+			}
 		});
 	}
-	request_json_maze(rows=15, cols=20) {
+	request_json_maze(rows=10, cols=15) {
 		let request = new XMLHttpRequest();
 		let url = "http://www.lespursetdurs.fr/maze/?rows=" + rows + "&cols=" + cols +"&json";
 		let that = this;
