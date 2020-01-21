@@ -94,12 +94,14 @@ class DP {
 		this.new_maze_animation_on = false;
 		this.init_from_matrix(matrix);
 		this.attach_listeners();
+
+		this.set_outputs();
 	}
 	init_from_matrix(matrix) {
 		this.config = {
 			wallWidth: 2,
 			pathWidth: 4, // modified by init_sizes
-			pathWidthCoeff: 0.1,
+			pathWidthCoeff: 0.25,
 			goal_color: 'orange',
 			clear_color: 'white',
 		}
@@ -150,13 +152,33 @@ class DP {
 		canvas.width = (this.cols + 2) * this.size;
 		canvas.height = (this.rows + 2) * this.size;
 		context.lineWidth = this.config.wallWidth;
-		context.font = '' + (this.size - 2 * context.lineWidth) / 3 + 'px monospace';	
+		context.font =
+			'' + (this.size - 2 * context.lineWidth) / 3 + 'px monospace';	
 		context.lineCap = 'round';
 			
 		this.row_step = this.size;
 		this.col_step = this.size;
 		
 		this.config.pathWidth = Math.floor(this.size * this.config.pathWidthCoeff);
+	}
+	set_outputs() {
+		this.mi_i_output = document.getElementById("mi_i_mouse");
+		this.mi_j_output = document.getElementById("mi_j_mouse");
+		this.mi_possible_actions_output =
+			document.getElementById("mi_possible_actions");
+
+		// Reward value output
+		this.mi_reward_output = document.getElementById("mi_reward");
+
+		// Value output
+		this.mi_up_output = document.getElementById("mi_up");
+		this.mi_right_output = document.getElementById("mi_right");
+		this.mi_down_output = document.getElementById("mi_down");
+		this.mi_left_output = document.getElementById("mi_left");
+		this.mi_no_move_output = document.getElementById("mi_no_move");
+
+		// Maximum value output
+		this.mi_max_value_output = document.getElementById("mi_max");
 	}
 	/* should init be set? */
 	init_DOM_goal_coordinates() {
@@ -305,10 +327,18 @@ class DP {
 			}
 		}
 	}
-	fill_top(canvas, i, j, color)    { this.clear_line_with_rect(canvas, i, j, 0, -1, color); }
-	fill_bottom(canvas, i, j, color) { this.clear_line_with_rect(canvas, i, j, 1, -1, color); }
-	fill_left(canvas, i, j, color)   { this.clear_line_with_rect(canvas, i, j, 0,  0, color); }
-	fill_right(canvas, i, j, color)  { this.clear_line_with_rect(canvas, i, j, 0,  1, color); }
+	fill_top(canvas, i, j, color) {
+		this.clear_line_with_rect(canvas, i, j, 0, -1, color);
+	}
+	fill_bottom(canvas, i, j, color) {
+		this.clear_line_with_rect(canvas, i, j, 1, -1, color);
+	}
+	fill_left(canvas, i, j, color) {
+		this.clear_line_with_rect(canvas, i, j, 0,  0, color);
+	}
+	fill_right(canvas, i, j, color) {
+		this.clear_line_with_rect(canvas, i, j, 0,  1, color);
+	}
 	
 	clear_line_with_rect(canvas, i, j, bottom, right, color) {
 		let context = canvas.getContext('2d');
@@ -617,31 +647,19 @@ class DP {
 		this.canvas.addEventListener('mousemove', function(event) {
 			let [j, i] = that.coordinates_from_mouse_event(event);
 
-			let mi_i = document.getElementById("mi_i_mouse");
-			let mi_j = document.getElementById("mi_j_mouse");
-			
-			let mi_possible_actions = document.getElementById("mi_possible_actions");
 			let array_possible_actions = that.possible_actions(i, j);
 			
-			mi_i.innerHTML = (''+i).padStart(2,'0');
-			mi_j.innerHTML = (''+j).padStart(2,'0');
+			that.mi_i_output.innerHTML = (''+i).padStart(2,'0');
+			that.mi_j_output.innerHTML = (''+j).padStart(2,'0');
 			
 			//mi_possible_actions.textContent = array_possible_actions.join(",");
-			mi_possible_actions.innerHTML = "<mi>" + array_possible_actions.join("</mi><mi>") + "</mi>";
+			that.mi_possible_actions_output.innerHTML = "<mi>"
+				+ array_possible_actions.join("</mi><mi>") + "</mi>";
 
-			// Valeur de la fonction de récompense
-			let mi_reward = document.getElementById("mi_reward");
 			if(!(i < 0 || j < 0 || i >= that.rows || j >= that.cols)) {
-				mi_reward.innerHTML = that.reward_matrix[i][j];
+				that.mi_reward_output.innerHTML = that.reward_matrix[i][j];
 			}
 
-			// Valeur de... la fonction de valeur
-			let mi_up = document.getElementById("mi_up");
-			let mi_right = document.getElementById("mi_right");
-			let mi_down = document.getElementById("mi_down");
-			let mi_left = document.getElementById("mi_left");
-			let mi_no_move = document.getElementById("mi_no_move");
-			
 			if(!(i < 0 || j < 0 || i >= that.rows || j >= that.cols)) {
 				mi_no_move.innerHTML = that.value_matrix[i][j];
 			}
@@ -651,15 +669,20 @@ class DP {
 			
 			let fill_string = f("");
 			
-			mi_up.innerHTML    = array_possible_actions.includes("Up")    ? f(that.value_matrix[i-1][j]) : fill_string;
-			mi_right.innerHTML = array_possible_actions.includes("Right") ? f(that.value_matrix[i][j+1]) : fill_string;
-			mi_down.innerHTML  = array_possible_actions.includes("Down")  ? f(that.value_matrix[i+1][j]) : fill_string;
-			mi_left.innerHTML  = array_possible_actions.includes("Left")  ? f(that.value_matrix[i][j-1]) : fill_string;
+			that.mi_up_output.innerHTML = array_possible_actions.includes("Up") ?
+				f(that.value_matrix[i-1][j]) : fill_string;
+			that.mi_right_output.innerHTML =
+				array_possible_actions.includes("Right") ?
+				f(that.value_matrix[i][j+1]) : fill_string;
+			that.mi_down_output.innerHTML  =
+				array_possible_actions.includes("Down") ?
+				f(that.value_matrix[i+1][j]) : fill_string;
+			that.mi_left_output.innerHTML = array_possible_actions.includes("Left") ?
+				f(that.value_matrix[i][j-1]) : fill_string;
 
 			// Valeur du max
-			let mi_max = document.getElementById("mi_max");
 			if(!(i < 0 || j < 0 || i >= that.rows || j >= that.cols)) {
-				mi_max.innerHTML = that.maximum_value(i, j);
+				that.mi_max_value_output.innerHTML = that.maximum_value(i, j);
 			}
 		});
 	}
