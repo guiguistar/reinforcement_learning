@@ -15,7 +15,7 @@
 		<h1>
 		  Solving a maze with Bellman's equation
 		</h1>
-		<canvas id="main_canvas" width="640px" height="480px"></canvas>
+		<canvas id="main_canvas" width="640" height="480"></canvas>
 		<img src="bellman_equation3.svg" alt="Bellman's equation">
 	  </section>
 	  <section class="float-left">
@@ -62,8 +62,7 @@
 		</form>
 		<div>
 		  <label for="draw_checked_input">values</label>
-		  <input type="checkbox" id="draw_checked_input"
-				 autocomplete="off" checked >
+		  <input type="checkbox" id="draw_checked_input" checked >
 		</div>
 		<form id="mouse_options_group">
 		  <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -82,13 +81,14 @@
 		<p>i_goal=<span id="i_goal">?</span>, j_goal=<span id="j_goal">?</span></p>
 	  </section>
 	  <section class="float-left">
+		<h4>Outputs</h4>
 		<ul>
 		  <li>
 			<math>
 			  <mrow>
 				<mi>x</mi>
 				<mo>=</mo>
-				<mfenced open="(" close=")" separator=",">
+				<mfenced open="(" close=")">
 				  <mi id="mi_i_mouse">
 				  </mi>
 				  <mi id="mi_j_mouse">
@@ -103,12 +103,12 @@
 				<mrow>
 				  <mi>U</mi>
 				  <mo>&#x2061;<!--FUNCTION APPLICATION--></mo>
-				  <mfenced open="(" close=")" separator=",">
+				  <mfenced open="(" close=")">
 					<mi>x</mi>
 				  </mfenced>
 				</mrow>
 				<mo>=</mo>
-				<mfenced open="{" close="}" separator="," id="mi_possible_actions">
+				<mfenced open="{" close="}" id="mi_possible_actions">
 				</mfenced>
 			  </mrow>
 			</math>
@@ -158,6 +158,7 @@
 						  </mrow>
 						</mfenced>
 						<mo>=</mo>
+					  </mrow>
 					</math>
 				  </td>
 				  <td id="cell_2_1">

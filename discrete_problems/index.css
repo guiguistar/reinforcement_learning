@@ -16,6 +16,9 @@ canvas {
 	/*border: solid 1px;*/
 	/*border-color: 'black';*/
 }
+canvas:hover {
+	cursor: pointer;
+}
 input[type="number"] {
 	width: 5em;
 	text-align: center;
