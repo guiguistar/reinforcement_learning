@@ -771,8 +771,7 @@ class DP {
 		return matrix;
 	}	
 	static compute_color_from_value(value, alpha=1) {
-		//let color = 'hsl(240, 80%, ' + (100 + 0.5 * this.value_matrix[i][j]) + '%)';
-		let color = 'hsla(' + (360 - value) + ', 60%, 50%, ' + alpha +')';
+		let color = 'hsla(' + (360 - value) + ', 100%, 82.5%, ' + alpha +')';
 
 		return color;
 	}
