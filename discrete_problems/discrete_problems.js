@@ -688,7 +688,7 @@ class DP {
 	}
 	request_json_maze(rows=10, cols=15) {
 		let request = new XMLHttpRequest();
-		let url = "http://www.guillaumeroux.fr/maze/?rows=" + rows + "&cols=" + cols +"&json";
+		let url = "https://guillaumeroux.fr/maze/?rows=" + rows + "&cols=" + cols +"&json";
 		let that = this;
 
 		console.log(url);

@@ -1,0 +1,199 @@
+0;10;1c<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="index.css">
+	<link rel="stylesheet"
+		  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+		  crossorigin="anonymous">
+    <title>Discrete problems</title>
+  </head>
+  <body>
+    <main class="container">
+	  <section id="first_section" class="float-left">
+		<h1>
+		  Solving a maze with Bellman's equation
+		</h1>
+		<canvas id="main_canvas" width="640" height="480"></canvas>
+		<img src="bellman_equation3.svg" alt="Bellman's equation">
+	  </section>
+	  <section class="float-left">
+		<h4>Value iteration</h4>
+		<form>
+		  <div>
+			<label for="iteration_number_input">Iterations</label>
+			<input type="number" id="iteration_number_input" min="1" max="10000" value="1">
+		  </div>
+		  <button type="submit" id="iteration_button"
+				  class="btn btn-primary">
+			Iterate
+		  </button>
+		  <button type="submit" id="converge_button"
+				  class="btn btn-primary">
+			Converge
+		  </button>
+		</form>
+		<h4>Maze</h4>
+		<form>
+		  <div class="form-group">
+			<label for="rows_input">Rows</label>
+			<input type="range" id="rows_input" min="1" max="100" value="20">
+		  </div>
+		  <div>
+			<label for="cols_input">Cols</label>
+			<input type="range" id="cols_input" min="1" max="100" value="20">
+		  </div>
+		  <button type="submit" class="btn btn-primary" id="new_maze_button">New maze</button>
+		</form>
+		<h4>Matrices</h4>
+		<form id="matrices_options_group">
+		  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+			<label class="btn btn-secondary active">
+			  <input type="radio" name="matrices_options" id="value_option" checked> Value
+			</label>
+			<label class="btn btn-secondary">
+			  <input type="radio" name="matrices_options" id="reward_option" > Reward
+			</label>
+			<label class="btn btn-secondary">
+			  <input type="radio" name="matrices_options" id="none_option" > None
+			</label>
+		  </div>
+		</form>
+		<div>
+		  <label for="draw_checked_input">values</label>
+		  <input type="checkbox" id="draw_checked_input" checked >
+		</div>
+		<form id="mouse_options_group">
+		  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+			<label class="btn btn-secondary active">
+			  <input type="radio" name="mouse_options"
+					 id="start_point_option" checked >
+			  Start point
+			</label>
+			<label class="btn btn-secondary">
+			  <input type="radio" name="mouse_options"
+					 id="end_point_option" >
+			  End point
+			</label>
+		  </div>
+		</form>
+		<p>i_goal=<span id="i_goal">?</span>, j_goal=<span id="j_goal">?</span></p>
+	  </section>
+	  <section class="float-left">
+		<h4>Outputs</h4>
+		<ul>
+		  <li>
+			<math>
+			  <mrow>
+				<mi>x</mi>
+				<mo>=</mo>
+				<mfenced open="(" close=")">
+				  <mi id="mi_i_mouse">
+				  </mi>
+				  <mi id="mi_j_mouse">
+				  </mi>
+				</mfenced>
+			  </mrow>
+			</math>
+		  </li>
+		  <li>
+			<math>
+			  <mrow>
+				<mrow>
+				  <mi>U</mi>
+				  <mo>&#x2061;<!--FUNCTION APPLICATION--></mo>
+				  <mfenced open="(" close=")">
+					<mi>x</mi>
+				  </mfenced>
+				</mrow>
+				<mo>=</mo>
+				<mfenced open="{" close="}" id="mi_possible_actions">
+				</mfenced>
+			  </mrow>
+			</math>
+		  </li>
+		  <li>
+			<math>
+			  <mrow>
+				<mi>r</mi>
+				<mo>&#x2061;<!--FUNCTION APPLICATION--></mo>
+				<mfenced>
+				  <mi>x</mi>
+				  <mi>u</mi>
+				</mfenced>
+				<mo>=</mo>
+				<mi id="mi_reward"></mi>
+			  </mrow>
+			</math>
+		  </li>
+		  <li>
+			<table id="max_value_grid">
+			  <tbody>
+				<tr>
+				  <td id="cell_1_0"></td>
+				  <td id="cell_1_1"></td>
+				  <td id="cell_1_2">
+					<math><mrow><mi id="mi_up"></mi></mrow></math>
+				  </td>
+				  <td id="cell_1_3"></td>
+				</tr>
+				<tr>
+				  <td id="cell_2_0">
+					<math>
+					  <mrow>
+						<msup>
+						  <mi>V</mi>
+						  <mo>*</mo>
+						</msup>
+						<mo>&#x2061;<!--FUNCTION APPLICATION--></mo>
+						<mfenced>
+						  <mrow>
+							<mi>&nu;</mi>
+							<mo>&#x2061;<!--FUNCTION APPLICATION--></mo>
+							<mfenced>
+							  <mi>x</mi>
+							  <mi>u</mi>
+							</mfenced>
+						  </mrow>
+						</mfenced>
+						<mo>=</mo>
+					  </mrow>
+					</math>
+				  </td>
+				  <td id="cell_2_1">
+					<math><mrow><mi id="mi_left"></mi></mrow></math>
+				  </td>
+				  <td id="cell_2_2">
+					<math><mrow><mi id="mi_no_move"></mi></mrow></math>
+				  </td>
+				  <td id="cell_2_3">
+					<math><mrow><mi id="mi_right"></mi></mrow></math>
+				  </td>
+				</tr>
+				<tr>
+				  <td id="cell_3_0"></td>
+				  <td id="cell_3_1"></td>
+				  <td id="cell_3_2">
+					<math><mrow><mi id="mi_down"></mi></mrow></math>
+				  </td>
+				  <td id="cell_3_3"></td>
+				</tr>
+			  </tbody>
+			</table>
+		  </li>
+		  <li>
+			<math>
+			  <mrow>
+				<mi>max</mi>
+				<mo>&rarr;</mo>
+				<mi id="mi_max">?</mi>
+			  </mrow>
+			</math>
+		  </li>
+		</ul>
+	  </section>
+	</main>
+	<script src="discrete_problems.js"></script>
+  </body>
+</html>
